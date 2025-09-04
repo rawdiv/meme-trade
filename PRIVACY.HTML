@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MemeX — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1e1e1e; --text:#f5f5f5; --muted:#bdbdbd;
+    --accentA:#00FFC3; --accentB:#FF00B8;
+    --card:#232323; --stroke:rgba(255,255,255,0.08);
+    --glass:rgba(255,255,255,0.06); --shadow:0 10px 30px rgba(0,0,0,0.5);
+    --radius:18px; --gap:20px; --link:#d9fff6;
+  }
+  *{box-sizing:border-box}
+  html,body{background:linear-gradient(180deg,#141414 0%, #1e1e1e 30%, #141414 100%);color:var(--text);margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:"Bebas Neue", Impact, sans-serif; letter-spacing:0.5px}
+  img{max-width:100%;display:block}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter: blur(10px);background: linear-gradient(180deg, rgba(30,30,30,0.85), rgba(30,30,30,0.55));border-bottom:1px solid var(--stroke)}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:14px 18px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+  .brand-badge{width:32px;height:32px;border-radius:10px;background: radial-gradient(120% 120% at 10% 10%, var(--accentA), var(--accentB));box-shadow:0 0 20px rgba(255,0,184,0.35), 0 0 30px rgba(0,255,195,0.25)}
+  .nav-links{display:flex;gap:14px;align-items:center}
+  .pill{padding:10px 14px;border-radius:999px;background:transparent;border:1px solid var(--stroke);color:var(--text);transition:0.25s ease;font-weight:600}
+  .pill:hover{border-color:var(--accentA);box-shadow:0 0 0 3px rgba(0,255,195,0.12)}
+  .cta{background:linear-gradient(135deg,var(--accentB),var(--accentA));color:#0b0b0b;border:none;box-shadow:0 10px 20px rgba(255,0,184,0.2), 0 10px 24px rgba(0,255,195,0.15)}
+  .cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+
+  /* Hamburger */
+  .hamb{display:none;align-items:center;gap:10px}
+  .hamb-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--stroke);background:#1c1c1c;color:var(--text);display:grid;place-items:center;cursor:pointer}
+  .hamb-btn span,.hamb-btn span:before,.hamb-btn span:after{content:"";display:block;width:20px;height:2px;background:var(--text);border-radius:2px;position:relative;transition:.25s}
+  .hamb-btn span:before{position:absolute;top:-6px}
+  .hamb-btn span:after{position:absolute;top:6px}
+  .hamb-btn.active span{background:transparent}
+  .hamb-btn.active span:before{top:0;transform:rotate(45deg)}
+  .hamb-btn.active span:after{top:0;transform:rotate(-45deg)}
+  .drawer{display:none;position:absolute;left:0;right:0;top:100%;background:rgba(22,22,22,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--stroke)}
+  .drawer .nav-links{flex-direction:column;align-items:stretch;padding:12px}
+  .drawer .pill{width:100%;text-align:center}
+  @media (max-width:900px){
+    .nav-links.desktop{display:none}
+    .hamb{display:flex}
+  }
+
+  /* Page header */
+  .header{max-width:900px;margin:0 auto;padding:60px 18px 10px}
+  .title{font-size:clamp(40px,6.5vw,76px);line-height:0.95;margin:0 0 12px;background:linear-gradient(135deg,var(--accentA) 10%, var(--text) 40%, var(--accentB) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .meta{color:var(--muted)}
+
+  /* Layout */
+  .wrap{max-width:900px;margin:0 auto;padding:20px 18px 70px}
+  .card{background:linear-gradient(180deg,var(--glass),transparent);border:1px solid var(--stroke);border-radius:18px;padding:20px;margin-bottom:16px}
+  .toc{display:grid;gap:10px}
+  .toc a{display:block;padding:10px 12px;border:1px dashed var(--stroke);border-radius:12px;color:var(--muted)}
+  .toc a:hover{border-color:var(--accentA);color:var(--text)}
+  .section h2{font-size:32px;margin:8px 0 6px}
+  .section p,.section li{color:var(--muted);line-height:1.65}
+  .section ul{margin:8px 0 0;padding-left:18px}
+  .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;background:linear-gradient(135deg,var(--accentB),var(--accentA));color:#0b0b0b}
+
+  /* Footer */
+  footer{border-top:1px solid var(--stroke); background:#121212}
+  .foot{max-width:1100px;margin:0 auto;padding:26px 18px;display:grid;grid-template-columns:1fr auto auto auto;gap:18px}
+  @media (max-width:900px){ .foot{grid-template-columns:1fr 1fr} }
+  .foot a{color:var(--muted)}
+  .copyright{grid-column:1/-1;color:#7a7a7a;font-size:13px;margin-top:8px}
+
+  /* Shine */
+  .shine{position:relative;overflow:hidden;isolation:isolate}
+  .shine:after{content:"";position:absolute;inset:-1px;border-radius:inherit;mix-blend-mode:overlay;opacity:0;transition:.4s ease;background: radial-gradient(500px 200px at var(--x,50%) -10%, rgba(255,255,255,0.25), transparent 60%)}
+  .shine:hover:after{opacity:.9}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-wrap">
+    <div class="brand">
+      <div class="brand-badge"></div>
+      <div>MemeX</div>
+    </div>
+    <div class="nav-links desktop">
+      <a href="/" class="pill">Home</a>
+      <a href="/#features" class="pill">Features</a>
+      <a href="/#trending" class="pill">Trending</a>
+      <a href="/terms" class="pill">Terms</a>
+      <a href="/waitlist" class="pill cta">Join Waitlist</a>
+    </div>
+    <div class="hamb">
+      <button class="hamb-btn" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    </div>
+    <div class="drawer" id="drawer">
+      <div class="nav-links">
+        <a href="/" class="pill">Home</a>
+        <a href="/#features" class="pill">Features</a>
+        <a href="/#trending" class="pill">Trending</a>
+        <a href="/terms" class="pill">Terms</a>
+        <a href="/waitlist" class="pill cta">Join Waitlist</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="header">
+  <h1 class="title">Privacy Policy</h1>
+  <p class="meta">Effective Date: <span class="badge">[Insert Date]</span> &nbsp; • &nbsp; Last Updated: <span class="badge">[Insert Date]</span></p>
+  <div class="card shine" style="margin-top:14px">
+    <p>Welcome to [MEMEX] (“we”, “us”, or “our”). We value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, share, and protect your information when you use our website, mobile app, and services (collectively, the “Platform”). By using the Platform, you agree to this Privacy Policy. If you do not agree, please do not use the Platform.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin:0 0 8px">Table of Contents</h3>
+    <div class="toc">
+      <a href="#info">1. Information We Collect</a>
+      <a href="#use">2. How We Use Your Information</a>
+      <a href="#share">3. Sharing Your Information</a>
+      <a href="#cookies">4. Cookies and Tracking</a>
+      <a href="#security">5. Data Security</a>
+      <a href="#children">6. Children’s Privacy</a>
+      <a href="#transfers">7. International Data Transfers</a>
+      <a href="#rights">8. Your Rights and Choices</a>
+      <a href="#deletion">9. Account Deletion</a>
+      <a href="#contact">10. Contact Us</a>
+      <a href="#changes">11. Changes to This Policy</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="info" class="section card shine">
+    <h2>1. Information We Collect</h2>
+    <p>We collect different types of information depending on how you interact with the Platform.</p>
+    <h3 style="margin:10px 0 4px">a. Information You Provide Directly</h3>
+    <ul>
+      <li>Account Information: Username, email address, password, and profile picture.</li>
+      <li>Profile Details: Bio, links to social media, and meme preferences.</li>
+      <li>User-Generated Content: Memes, captions, comments, messages, and other uploads.</li>
+      <li>Transaction Details: Meme trades, purchases, earnings, and virtual wallet activity.</li>
+    </ul>
+    <h3 style="margin:14px 0 4px">b. Information We Collect Automatically</h3>
+    <ul>
+      <li>Device Data: Device type, operating system, browser type, IP address.</li>
+      <li>Usage Data: Pages visited, features used, time spent on the Platform.</li>
+      <li>Cookies and Similar Technologies: Used for session management, preferences, and analytics.</li>
+    </ul>
+  </section>
+
+  <section id="use" class="section card">
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+      <li>Provide and operate our services, including meme trading, sales, and purchases.</li>
+      <li>Personalize your experience and display relevant content.</li>
+      <li>Send account-related notifications (e.g., confirmations, security alerts).</li>
+      <li>Improve the Platform’s performance, reliability, and security.</li>
+      <li>Conduct analytics to understand usage and improve features.</li>
+      <li>Detect and prevent fraud, abuse, or violations of our Terms.</li>
+    </ul>
+  </section>
+
+  <section id="share" class="section card shine">
+    <h2>3. Sharing Your Information</h2>
+    <p>We do not sell your personal information. We may share data in these situations:</p>
+    <h3 style="margin:10px 0 4px">a. With Service Providers</h3>
+    <p>Hosting providers, analytics partners, payment processors, and other vendors who are contractually obligated to protect your data.</p>
+    <h3 style="margin:10px 0 4px">b. With Other Users</h3>
+    <p>Content you post may be publicly visible. Your username, profile image, and memes may appear in feeds, leaderboards, and discovery surfaces.</p>
+    <h3 style="margin:10px 0 4px">c. For Legal or Security Reasons</h3>
+    <p>To comply with legal obligations, protect rights and safety, or investigate fraud, abuse, or security issues.</p>
+  </section>
+
+  <section id="cookies" class="section card">
+    <h2>4. Cookies and Tracking</h2>
+    <ul>
+      <li>Remember login and preferences, maintain sessions, and analyze site traffic.</li>
+      <li>Provide relevant content or promotions and measure campaign performance.</li>
+      <li>Manage cookies in browser settings; disabling may affect some features.</li>
+    </ul>
+  </section>
+
+  <section id="security" class="section card shine">
+    <h2>5. Data Security</h2>
+    <ul>
+      <li>Encrypted transmissions via HTTPS and secure password hashing.</li>
+      <li>Access controls, monitoring, and firewalls to protect systems.</li>
+      <li>No method is 100% secure—use strong passwords and safeguard credentials.</li>
+    </ul>
+  </section>
+
+  <section id="children" class="section card">
+    <h2>6. Children’s Privacy</h2>
+    <p>The Platform is not intended for children under 13 (or the minimum legal age in your jurisdiction). We do not knowingly collect personal data from minors. If you believe a minor provided data, contact us at [Insert Contact Email] for prompt removal.</p>
+  </section>
+
+  <section id="transfers" class="section card shine">
+    <h2>7. International Data Transfers</h2>
+    <p>Our servers and service providers may be located in different countries. By using the Platform, you consent to the transfer and processing of your data in jurisdictions that may have different data protection laws.</p>
+  </section>
+
+  <section id="rights" class="section card">
+    <h2>8. Your Rights and Choices</h2>
+    <p>Depending on your location, rights may include access, correction, deletion, withdrawal of consent, objection to processing, and data export. To exercise rights, contact us at [Insert Contact Email]. We may verify identity before fulfilling requests.</p>
+  </section>
+
+  <section id="deletion" class="section card shine">
+    <h2>9. Account Deletion</h2>
+    <p>Delete your account anytime in Profile settings. We will delete personal data unless retention is required for legal or legitimate business purposes (e.g., fraud prevention, financial reporting, or dispute resolution).</p>
+  </section>
+
+  <section id="contact" class="section card">
+    <h2>10. Contact Us</h2>
+    <p>[Your Company Name]<br/>Email: [Insert Email]<br/>Address: [Insert Address, if applicable]<br/>Phone: [Optional]</p>
+  </section>
+
+  <section id="changes" class="section card shine">
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. If significant changes are made, we will notify via email or a prominent notice on the Platform. Please review this policy periodically for updates.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="brand" style="margin-bottom:8px"><div class="brand-badge"></div><div>MemeX</div></div>
+      <div class="muted" style="max-width:40ch">Protecting memes and data with clarity and care.</div>
+    </div>
+    <div><b>Legal</b><br/><a href="/terms">Terms</a><br/><a href="/privacy">Privacy</a></div>
+    <div><b>Product</b><br/><a href="/#features">Features</a><br/><a href="/#trending">Trending</a></div>
+    <div><b>Community</b><br/><a href="/waitlist">Join Waitlist</a><br/><a href

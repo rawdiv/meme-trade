@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MemeX — Features</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0f10;
+    --bg2:#1a1a1c;
+    --text:#f5f5f5;
+    --muted:#bdbdbd;
+    --accentA:#00FFC3;
+    --accentB:#FF00B8;
+    --card:#191a1c;
+    --stroke:rgba(255,255,255,0.08);
+    --glass:rgba(255,255,255,0.06);
+    --shadow:0 10px 30px rgba(0,0,0,0.5);
+    --radius:18px;
+
+    /* spacing scale */
+    --s-1:6px;  --s0:10px; --s1:14px; --s2:18px; --s3:24px; --s4:32px; --s5:44px; --s6:64px;
+
+    --max:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{
+    background:linear-gradient(180deg,#0d0d0e 0%, #131314 30%, #0d0d0e 100%);
+    color:var(--text); margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  a{color:#d9fff6;text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:"Bebas Neue", Impact, sans-serif; letter-spacing:0.5px}
+  img{max-width:100%;display:block}
+  p{line-height:1.7}
+
+  /* Shell containers */
+  .container{max-width:var(--max); margin:0 auto; padding:0 var(--s2)}
+  .section{padding:var(--s6) 0}
+  .stack{display:grid; gap:var(--s3)}
+  .card{
+    background:linear-gradient(180deg,var(--glass),transparent);
+    border:1px solid var(--stroke); border-radius:var(--radius);
+    padding:var(--s3)
+  }
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter: blur(10px);background: linear-gradient(180deg, rgba(26,26,28,0.9), rgba(26,26,28,0.6));border-bottom:1px solid var(--stroke)}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between}
+  .nav-inner{max-width:var(--max);margin:0 auto;padding:var(--s1) var(--s2)}
+  .brand{display:flex;align-items:center;gap:var(--s1);font-weight:800}
+  .brand-badge{width:34px;height:34px;border-radius:10px;background: radial-gradient(120% 120% at 10% 10%, var(--accentA), var(--accentB));box-shadow:0 0 20px rgba(255,0,184,0.35), 0 0 30px rgba(0,255,195,0.25)}
+  .nav-links{display:flex;gap:var(--s1);align-items:center}
+  .pill{padding:10px 14px;border-radius:999px;background:transparent;border:1px solid var(--stroke);color:var(--text);transition:0.25s ease;font-weight:600;white-space:nowrap}
+  .pill:hover{border-color:var(--accentA);box-shadow:0 0 0 3px rgba(0,255,195,0.12)}
+  .cta{background:linear-gradient(135deg,var(--accentB),var(--accentA));color:#0b0b0b;border:none;box-shadow:0 10px 20px rgba(255,0,184,0.2), 0 10px 24px rgba(0,255,195,0.15)}
+  .cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+
+  /* Hamburger */
+  .hamb{display:none;align-items:center;gap:10px}
+  .hamb-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--stroke);background:#1c1c1c;color:var(--text);display:grid;place-items:center;cursor:pointer}
+  .hamb-btn span,.hamb-btn span:before,.hamb-btn span:after{content:"";display:block;width:20px;height:2px;background:var(--text);border-radius:2px;position:relative;transition:.25s}
+  .hamb-btn span:before{position:absolute;top:-6px}
+  .hamb-btn span:after{position:absolute;top:6px}
+  .hamb-btn.active span{background:transparent}
+  .hamb-btn.active span:before{top:0;transform:rotate(45deg)}
+  .hamb-btn.active span:after{top:0;transform:rotate(-45deg)}
+  .drawer{display:none;position:absolute;left:0;right:0;top:100%;background:rgba(22,22,22,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--stroke)}
+  .drawer .nav-links{flex-direction:column;align-items:stretch;padding:var(--s1)}
+  .drawer .pill{width:100%;text-align:center}
+  @media (max-width:900px){
+    .nav-links.desktop{display:none}
+    .hamb{display:flex}
+  }
+
+  /* Header */
+  .header .title{
+    font-size:clamp(40px,6.5vw,80px);line-height:0.95;margin:0 0 var(--s1);
+    background:linear-gradient(135deg,var(--accentA) 10%, var(--text) 40%, var(--accentB) 80%);
+    -webkit-background-clip:text;background-clip:text;color:transparent
+  }
+  .subtitle{color:var(--muted);font-size:18px;margin:0}
+
+  /* Main */
+  .main{
+    display:grid;grid-template-columns:2fr 1fr; gap:var(--s3)
+  }
+  @media (max-width:1000px){ .main{grid-template-columns:1fr} }
+
+  .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s1)}
+  @media (max-width:700px){ .kpis{grid-template-columns:1fr} }
+  .kpi{display:flex;gap:var(--s1);align-items:center;background:linear-gradient(180deg,#181818,#121212);border:1px solid var(--stroke);border-radius:14px;padding:var(--s2)}
+  .kpi b{font-size:20px;background:linear-gradient(135deg,var(--accentA),var(--accentB));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* Table */
+  table{width:100%;border-collapse:separate;border-spacing:0 var(--s1)}
+  th, td{padding:12px 14px;text-align:left}
+  th{color:var(--muted);font-weight:600}
+  tbody tr{background:linear-gradient(180deg,var(--glass),transparent);border:1px solid var(--stroke)}
+  tbody tr td{border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke)}
+  tbody tr td:first-child{border-left:1px solid var(--stroke);border-top-left-radius:12px;border-bottom-left-radius:12px}
+  tbody tr td:last-child{border-right:1px solid var(--stroke);border-top-right-radius:12px;border-bottom-right-radius:12px}
+
+  /* Shine */
+  .shine{position:relative;overflow:hidden;isolation:isolate}
+  .shine:after{content:"";position:absolute;inset:-1px;border-radius:inherit;mix-blend-mode:overlay;opacity:0;transition:.4s ease;background: radial-gradient(500px 200px at var(--x,50%) -10%, rgba(255,255,255,0.25), transparent 60%)}
+  .shine:hover:after{opacity:.9}
+
+  /* Aside */
+  .aside{position:sticky;top:88px;height:max-content}
+  .cta-stack{display:grid;gap:var(--s1)}
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--stroke);
+    background:#111113;
+    margin-top:var(--s6);
+  }
+  .foot{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:var(--s5) max(env(safe-area-inset-left, 0px), var(--s2)) var(--s5) max(env(safe-area-inset-right, 0px), var(--s2));
+    display:grid;
+    grid-template-columns:2fr repeat(3,1fr);
+    gap:var(--s3) var(--s4);
+  }
+  .foot .muted{color:#9a9a9a}
+  .foot h4{margin:0 0 var(--s1); font-size:16px}
+  .foot a{color:#bfc9c7}
+  .copyright{grid-column:1/-1;color:#787878;font-size:13px;margin-top:var(--s2)}
+  @media (max-width:900px){
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:520px){
+    .foot{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-wrap">
+      <div class="brand">
+        <div class="brand-badge"></div>
+        <div>MemeX</div>
+      </div>
+      <div class="nav-links desktop">
+        <a href="/" class="pill">Home</a>
+        <a href="features.html" class="pill">Features</a>
+        <a href="/#trending" class="pill">Trending</a>
+        <a href="privacy.html" class="pill">Privacy</a>
+        <a href="/#waitlist" class="pill cta">Join Waitlist</a>
+      </div>
+      <div class="hamb">
+        <button class="hamb-btn" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+    <div class="drawer" id="drawer">
+      <div class="nav-links">
+        <a href="/" class="pill">Home</a>
+        <a href="features.html" class="pill">Features</a>
+        <a href="/#trending" class="pill">Trending</a>
+        <a href="privacy.html" class="pill">Privacy</a>
+        <a href="/#waitlist" class="pill cta">Join Waitlist</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="section">
+  <div class="container stack">
+    <div class="stack">
+      <h1 class="title">Featured Page — MemeX</h1>
+      <p class="subtitle">“Meme stonks only go up.” — some guy on Reddit probably</p>
+      <div class="card shine">
+        <p class="muted">Bold features, live market vibes, and chaos engineered for fun. This page breaks down how meme trading flows and what’s hot right now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="main">
+      <div class="stack">
+        <div class="card shine">
+          <h2>💸 Welcome to the Meme Market</h2>
+          <p>This ain’t crypto.<br/>This ain’t NFTs.<br/>This is raw meme trading – unfiltered, unregulated, totally unhinged (but fair).<br/>We built the marketplace the internet deserves: post memes, trade memes, flex memes. Simple.</p>
+        </div>
+
+        <div class="card">
+          <h2>📈 What’s Poppin’ Right Now</h2>
+          <p class="muted">Updated every 10 minutes. We got bots. Don’t worry.</p>
+          <div class="kpis" style="margin-top:var(--s1)">
+            <div class="kpi"><b>🔥 Top-Traded Memes Today</b><span class="muted">Live snapshot</span></div>
+            <div></div>
+          </div>
+          <ul>
+            <li>“Skibidi Sigma Baby CEO” — traded 134x</li>
+            <li>“NPC With Bluetooth Headphones” — up 420% in value</li>
+            <li>“Doge but Existential” — collector’s favorite</li>
+          </ul>
+          <div class="card" style="margin-top:var(--s2)">
+            <b class="badge">🚀 Meme Market Mood</b>
+            <p style="margin-top:var(--s1)">“Full send.” Traders are HODLing reaction pics and rage comics. Cringe-core is mooning.</p>
+          </div>
+        </div>
+
+        <div class="card shine">
+          <h2>🧠 How It Works</h2>
+          <ol style="padding-left:20px;margin:0">
+            <li><b>Step 1: Post a meme</b> → Can be original or repost (you just won’t get full clout)</li>
+            <li><b>Step 2: People offer trades</b> → Like Pokémon cards, but cursed</li>
+            <li><b>Step 3: Accept or decline</b> → Barter system but with serotonin</li>
+            <li><b>Step 4: Meme is yours now</b> → Flex in your profile, re-trade, or just stare at it for hours</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h2>🧃 Features You’ll Actually Use</h2>
+          <ul>
+            <li>🎒 <b>Meme Inventory</b> — Your digital meme binder. See what you own, what you traded, and what you regret.</li>
+            <li>📤 <b>Post & Pin Memes</b> — Got a banger? Post it. Want to flex your rarest? Pin it to your profile like a god.</li>
+            <li>💬 <b>Comments & Reactions</b> — Not just likes. React with 🤡, 💀, 💅, or custom emojis. Full chaos allowed.</li>
+            <li>🧑‍💻 <b>Profiles With Vibes</b> — Customize your vibe: Dark mode only, weird bios welcome, meme tier lists optional but respected.</li>
+            <li>📈 <b>Meme Value Tracker</b> — See how much your memes are worth in meme credits (🪙). Meme economy is real.</li>
+          </ul>
+        </div>
+
+        <div class="card shine">
+          <h2>⚔️ Weekly Meme Battles (Coming Soon)</h2>
+          <ul>
+            <li>Bracket-style meme duels</li>
+            <li>Winners get exclusive frames, badges, and mad clout</li>
+            <li>Losers? Still get dopamine</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>👑 Top Creators Right Now</h2>
+          <div style="overflow:auto">
+            <table aria-label="Top creators">
+              <thead><tr><th>Username</th><th>Flex Level</th><th>Best Meme</th></tr></thead>
+              <tbody>
+                <tr><td>@NoCapNana</td><td>🧠🧠🧠🧠🧠</td><td>“Baby Yoda but he’s a landlord”</td></tr>
+                <tr><td>@CringeCoin420</td><td>💀💀💀💀</td><td>“iPhone Alarm PTSD Simulator”</td></tr>
+                <tr><td>@vibecop</td><td>👮‍♂️👮‍♂️👮‍♂️</td><td>“Skibidi Toilet in the Met Gala”</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted" style="margin-top:var(--s1)">Want to get on the leaderboard? Start posting. No one’s gonna meme for you.</p>
+        </div>
+
+        <div class="card shine">
+          <h2>🛑 Rules? Yeah, a Few.</h2>
+          <ul>
+            <li>No hate, no weird stuff, no real gore. This is funny, not felony.</li>
+            <li>You post, you own it. Don’t steal memes and claim they’re yours.</li>
+            <li>We moderate. Chill.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>🫡 TL;DR</h2>
+          <ul>
+            <li>No NFTs. No crypto. No scams.</li>
+            <li>Just straight-up meme trading.</li>
+            <li>Powered by Gen Z, fueled by ADHD, and monetized by pure chaos.</li>
+          </ul>
+        </div>
+
+        <div class="card shine">
+          <h2>🕶 Ready to Trade?</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--s1)">
+            <a class="pill cta" href="/#waitlist">Start Trading Memes</a>
+            <a class="pill" href="/#trending">Browse Meme Market</a>
+            <a class="pill" href="/#features">Flex Your Collection</a>
+          </div>
+          <p class="muted" style="margin-top:var(--s1)">“Be the meme you want to see in the world.”</p>
+        </div>
+
+        <div class="card">
+          <h2>⚠️ Bonus Easter Egg</h2>
+          <p>Enter “🗿” on the homepage and something will happen. Not telling you what tho.</p>
+        </div>
+      </div>
+
+      <aside class="aside stack">
+        <div class="card">
+          <b class="badge">Live</b>
+          <p class="muted" style="margin-top:var(--s1)">Market updates every 10 minutes. Auto-refreshes on the main marketplace.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:6px 0 6px">Quick Links</h3>
+          <div class="cta-stack">
+            <a class="pill" href="/">Home</a>
+            <a class="pill" href="features.html">Features</a>
+            <a class="pill" href="privacy.html">Privacy</a>
+            <a class="pill cta" href="/#waitlist">Join Waitlist</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin:6px 0 6px">House Style</h3>
+          <p class="muted">Dark mode only, neon accents, playful copy, and chaos-friendly UX. Subtle glows, smooth hovers, zero cringe.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div>
+      <div class="brand" style="display:flex;align-items:center;gap:10px;margin-bottom:var(--s1)">
+        <div class="brand-badge"></div><div style="font-weight:800">MemeX</div>
+      </div>
+      <div class="muted" style="max-width:40ch">Built for trading culture. Bold, fast, and fun.</div>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy</a><br/>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="features.html">Features</a><br/>
+      <a href="/#trending">Trending</a>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <a href="/#waitlist">Join Waitlist</a><br/>
+      <a href="#">Discord</a>
+    </div>
+    <div class="copyright">© 2025 MemeX. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Shine hover gradient
+  const moveFx = (e, el) => {
+    const r = el.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    el.style.setProperty('--x', x + '%');
+    el.style.setProperty('--y', y + '%');
+  };
+  document.querySelectorAll('.shine').forEach(el=>{
+    el.addEventListener('mousemove', e=> moveFx(e, el));
+  });
+
+  // Hamburger
+  const hambBtn = document.querySelector('.hamb-btn');
+  const drawer = document.getElementById('drawer');
+  hambBtn.addEventListener('click', ()=>{
+    const open = hambBtn.classList.toggle('active');
+    drawer.style.display = open ? 'block' : 'none';
+    hambBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  drawer.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{
+    hambBtn.classList.remove('active');
+    drawer.style.display='none';
+    hambBtn.setAttribute('aria-expanded','false');
+  }));
+</script>
+</body>
+</html>
